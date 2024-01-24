@@ -4,10 +4,7 @@ import TodoList from './TodoList';
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: uuidv4(), name: 'Todo1', completed: false },
-    { id: uuidv4(), name: 'Todo2', completed: false },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const todoNameRef = useRef();
 
@@ -28,14 +25,14 @@ function App() {
     todo.completed = !todo.completed;
     setTodos(newTodos);
   }
-
+  
   return (
     <>
       <TodoList todos={todos} toggleTodo={toggleTodo}/>
       <input type="text" ref={todoNameRef} />
       <button onClick={handleAddTodo}>タスクを追加</button>
       <button>完了したタスクの削除</button>
-      <div>残りのタスク:0</div>
+      <div>残りのタスク:{todos.filter((todo) => !todo.completed).length}</div>
     </>
   );
 }
