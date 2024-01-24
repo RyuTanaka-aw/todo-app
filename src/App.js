@@ -1,11 +1,12 @@
 import './App.css';
 import React, { useState, useRef } from 'react';
 import TodoList from './TodoList';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: 1, name: 'Todo1', completed: false },
-    { id: 2, name: 'Todo2', completed: false },
+    { id: uuidv4(), name: 'Todo1', completed: false },
+    { id: uuidv4(), name: 'Todo2', completed: false },
   ]);
 
   const todoNameRef = useRef();
@@ -14,12 +15,9 @@ function App() {
     // 入力した値を取得
     const name = todoNameRef.current.value;
 
-    // idを現在の配列の数+1で設定
-    const id = todos.length + 1;
-
     setTodos((prevTodos) => {
       // スプレッド構文で現在の配列を展開し、新たに追加するタスクを最後尾に追加
-      return [...prevTodos, { id: id, name: name, completed: false }];
+      return [...prevTodos, { id: uuidv4(), name: name, completed: false }];
     })
     todoNameRef.current.value = null;
   }
